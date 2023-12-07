@@ -2,6 +2,7 @@ import 'package:brick_template/theme/cubit/theme_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:brick_template/counter/counter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -24,9 +25,13 @@ class AppBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: context.select((ThemeCubit cubit) => cubit.state.getThemeData()),
-      home: const CounterPage(),
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      builder: (ct, child) => child!,
+      child: MaterialApp(
+        theme: context.select((ThemeCubit cubit) => cubit.state.getThemeData()),
+        home: const CounterPage(),
+      ),
     );
   }
 }
